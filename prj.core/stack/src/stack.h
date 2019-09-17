@@ -1,4 +1,6 @@
 #pragma once
+#ifndef STACK_H_17_09_2019
+#define STACK_H_17_09_2019
 #include <iostream>
 
 template<typename T> class Stack {
@@ -97,3 +99,4 @@ T Stack<T>::Top() const {
         throw std::runtime_error("Stack is empty!\n");
     return top_->value;
 }
+#endif STACK_H_17_09_2019
