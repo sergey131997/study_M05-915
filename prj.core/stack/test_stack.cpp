@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <catch2/catch.hpp>
-#include "src/stack.h"
+#include "src/stack_vector_smartpoint.h"
 
 TEST_CASE("Test Creat", "Stack") {
         Stack<int> a;
