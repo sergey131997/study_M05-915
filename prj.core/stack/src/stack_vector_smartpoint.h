@@ -1,8 +1,10 @@
 #pragma once
-#ifndef STACK_VECTOR_H_17_09_2019
-#define STACK_VECTOR_H_17_09_2019
+#ifndef STACK_VECTOR_SMARTPINTER_H_17_09_2019
+#define STACK_VECTOR_SMARTPINTER_H_17_09_2019
 #include <iostream>
 #include <memory>
+
+namespace stack_vector_smartpointer {
 
 template<typename T> class Stack {
 public:
@@ -89,4 +91,7 @@ T Stack<T>::Top() const {
         throw std::runtime_error("Stack is empty!\n");
     return *(values_.get() + count_);
 }
-#endif STACK_VECTOR_H_17_09_2019
+
+}
+
+#endif STACK_VECTOR_SMARTPINTER_H_17_09_2019

@@ -3,29 +3,34 @@
 #include <string>
 #include <vector>
 #include <catch2/catch.hpp>
+
 #include "src/stack_vector_smartpoint.h"
+#include "src/stack_vector.h"
+#include "src/stack.h"
+
+#define stack_case stack_vector
 
 TEST_CASE("Test Creat", "Stack") {
-        Stack<int> a;
-        REQUIRE_NOTHROW(a.Push(1));
-        Stack<double> b;
-        REQUIRE_NOTHROW(b.Push(1.0));
-        Stack<char> c;
-        REQUIRE_NOTHROW(c.Push('1'));
-        Stack<std::string> d;
-        REQUIRE_NOTHROW(d.Push("1"));
-        Stack<std::vector<int>> e;
-        REQUIRE_NOTHROW(e.Push({1}));
+    stack_case::Stack<int> a;
+    REQUIRE_NOTHROW(a.Push(1));
+    stack_case::Stack<double> b;
+    REQUIRE_NOTHROW(b.Push(1.0));
+    stack_case::Stack<char> c;
+    REQUIRE_NOTHROW(c.Push('1'));
+    stack_case::Stack<std::string> d;
+    REQUIRE_NOTHROW(d.Push("1"));
+    stack_case::Stack<std::vector<int>> e;
+    REQUIRE_NOTHROW(e.Push({1}));
 }
 
 
 TEST_CASE("Test Push Pop", "Stack") {
-    Stack<int> st;
+    stack_case::Stack<int> st;
     for (size_t i(0); i < 100; ++i) {
         REQUIRE_NOTHROW(st.Push(random() % 100));
         REQUIRE_NOTHROW(st.Pop());
     }
-    Stack<double> b;
+    stack_case::Stack<double> b;
     for (size_t i(0); i < 100; ++i)
         REQUIRE_NOTHROW(b.Push(1.0));
     for (size_t i(0); i < 100; ++i)
@@ -33,14 +38,14 @@ TEST_CASE("Test Push Pop", "Stack") {
 }
 
 TEST_CASE("Test Top Empty Stack", "Stack") {
-    Stack<int> st;
+    stack_case::Stack<int> st;
     REQUIRE_NOTHROW(st.Push(1));
     REQUIRE_NOTHROW(st.Pop());
     REQUIRE_THROWS(st.Top());
 }
 
 TEST_CASE("Test Container", "Stack") {
-    Stack<int> st;
+    stack_case::Stack<int> st;
     std::vector<int> st_copy;
     st_copy.reserve(100);
     for (int i(0); i < 100; ++i) {
@@ -54,12 +59,12 @@ TEST_CASE("Test Container", "Stack") {
 }
 
 TEST_CASE("Test Copy", "Stack") {
-    Stack<int> st;
+    stack_case::Stack<int> st;
     for (size_t i(0); i < 100; ++i)
         st.Push(random() % 100);
 
-    Stack<int> st_copy_1(st);
-    Stack<int> st_copy_2;
+    stack_case::Stack<int> st_copy_1(st);
+    stack_case::Stack<int> st_copy_2;
 
     for (size_t i(0); i < 10; ++i)
         st_copy_2.Push(2);

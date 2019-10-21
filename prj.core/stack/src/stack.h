@@ -3,6 +3,8 @@
 #define STACK_H_17_09_2019
 #include <iostream>
 
+namespace stack {
+
 template<typename T> class Stack {
 public:
     Stack();
@@ -98,5 +100,7 @@ T Stack<T>::Top() const {
     if (IsEmpty())
         throw std::runtime_error("Stack is empty!\n");
     return top_->value;
+}
+
 }
 #endif STACK_H_17_09_2019

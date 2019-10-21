@@ -3,6 +3,8 @@
 #define STACK_VECTOR_H_17_09_2019
 #include <iostream>
 
+namespace stack_vector {
+
 template<typename T> class Stack {
 public:
     Stack();
@@ -13,7 +15,7 @@ public:
 
     void Pop();
 
-    void Push(const T &element);
+    void Push(const T &elementa);
 
     bool IsEmpty() const;
 
@@ -93,5 +95,7 @@ T Stack<T>::Top() const {
     if (IsEmpty())
         throw std::runtime_error("Stack is empty!\n");
     return values_[count_];
+}
+
 }
 #endif STACK_VECTOR_H_17_09_2019
