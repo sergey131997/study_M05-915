@@ -50,9 +50,9 @@ template<typename T>
 Stack<T>::Stack(const Stack<T> &other) {
     while(!IsEmpty())
         Pop();
-    capasity_ = 10;
+    capasity_ = other.capasity_;
     count_ = 0;
-    values_ = new T[10];
+    values_ = new T[other.capasity_];
     for (size_t i =0; i < other.count_; ++i)
         Push(other.values_[i]);
 }
@@ -61,9 +61,9 @@ template<typename T>
 Stack<T> Stack<T>::operator=(const Stack<T> &other) {
     while(!IsEmpty())
         Pop();
-    capasity_ = 10;
+    capasity_ = other.capasity_;
     count_ = 0;
-    values_ = new T[10];
+    values_ = new T[other.capasity_];
     for (size_t i =0; i < other.count_; ++i)
         Push(other.values_[i]);
     return *this;

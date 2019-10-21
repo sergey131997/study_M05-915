@@ -8,54 +8,54 @@
 
 //------------------------------------------------------------------------------------------------------------------
 
-void test_heap_stack() {
+void TestHeapStack(const size_t &count) {
     stack::Stack<int> test;
     auto tbegin = std::chrono::steady_clock::now();
-    for (int i = 0; i < 100000; ++i)
-        test.Push(i);
+    for (size_t i = 0; i < count; ++i)
+        test.Push(1);
     auto tpush = std::chrono::steady_clock::now();
-    for (int i = 0; i < 100000; ++i)
+    for (size_t i = 0; i < count; ++i)
         test.Pop();
     auto tpop = std::chrono::steady_clock::now();
-    ::fprintf(stdout, "list Push: %d\n",
+    ::fprintf(stdout, "%d\n",
               static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tpush - tbegin).count()));
-    ::fprintf(stdout, "list Pop:  %d\n\n",
+    ::fprintf(stdout, "%d\n",
               static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tpop - tpush).count()));
 }
 
-void test_heap_stack_vector() {
+void TestHeapStackVector(const size_t &count) {
     stack_vector::Stack<int> test;
     auto tbegin = std::chrono::steady_clock::now();
-    for (int i = 0; i < 100000; ++i)
-        test.Push(i);
+    for (size_t i = 0; i < count; ++i)
+        test.Push(1);
     auto tpush = std::chrono::steady_clock::now();
-    for (int i = 0; i < 100000; ++i)
+    for (size_t i = 0; i < count; ++i)
         test.Pop();
     auto tpop = std::chrono::steady_clock::now();
-    ::fprintf(stdout, "list Push: %d\n",
+    ::fprintf(stdout, "%d\n",
               static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tpush - tbegin).count()));
-    ::fprintf(stdout, "list Pop:  %d\n\n",
+    ::fprintf(stdout, "%d\n",
               static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tpop - tpush).count()));
 }
 
-void test_heap_stack_vector_smartpointer() {
-    stack_vector_smartpointer::Stack<int> test;
+void TestHeapStackVectorSmartpointer(const size_t &count) {
+    stack_vector::Stack<int> test;
     auto tbegin = std::chrono::steady_clock::now();
-    for (int i = 0; i < 100000; ++i)
-        test.Push(i);
+    for (size_t i = 0; i < count; ++i)
+        test.Push(1);
     auto tpush = std::chrono::steady_clock::now();
-    for (int i = 0; i < 100000; ++i)
+    for (size_t i = 0; i < count; ++i)
         test.Pop();
     auto tpop = std::chrono::steady_clock::now();
-    ::fprintf(stdout, "list Push: %d\n",
+    ::fprintf(stdout, "%d\n",
               static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tpush - tbegin).count()));
-    ::fprintf(stdout, "list Pop:  %d\n\n",
+    ::fprintf(stdout, "%d\n",
               static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tpop - tpush).count()));
 }
 
 //------------------------------------------------------------------------------------------------------------------
 
-void test_snake_stack(const std::vector<int> &queue) {
+void TestSnakeStack(const std::vector<int> &queue) {
     stack::Stack<int> test;
     auto tbegin = std::chrono::steady_clock::now();
     for(const int &i : queue)
@@ -64,11 +64,11 @@ void test_snake_stack(const std::vector<int> &queue) {
         else
             test.Pop();
     auto tend = std::chrono::steady_clock::now();
-    ::fprintf(stdout, "list:         %d\n\n",
+    ::fprintf(stdout, "%d\n",
               static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tend - tbegin).count()));
 }
 
-void test_snake_stack_vector(const std::vector<int> &queue) {
+void TestSnakeStackVector(const std::vector<int> &queue) {
     stack_vector::Stack<int> test;
     auto tbegin = std::chrono::steady_clock::now();
     for(const int &i : queue)
@@ -77,11 +77,11 @@ void test_snake_stack_vector(const std::vector<int> &queue) {
         else
             test.Pop();
     auto tend = std::chrono::steady_clock::now();
-    ::fprintf(stdout, "vector:       %d\n\n",
+    ::fprintf(stdout, "%d\n",
               static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tend - tbegin).count()));
 }
 
-void test_snake_stack_vector_smartpointer(const std::vector<int> &queue) {
+void TestSnakeStackVectorSmartpointer(const std::vector<int> &queue) {
     stack_vector_smartpointer::Stack<int> test;
     auto tbegin = std::chrono::steady_clock::now();
     for(const int &i : queue)
@@ -90,33 +90,88 @@ void test_snake_stack_vector_smartpointer(const std::vector<int> &queue) {
         else
             test.Pop();
     auto tend = std::chrono::steady_clock::now();
-    ::fprintf(stdout, "smartpointer: %d\n\n",
+    ::fprintf(stdout, "%d\n",
               static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tend - tbegin).count()));
 }
 
-int main() {
-    // Test heap
-    ::fprintf(stdout, "Test heap\n");
-    test_heap_stack();
-    test_heap_stack_vector();
-    test_heap_stack_vector_smartpointer();
+//------------------------------------------------------------------------------------------------------------------
 
-    // Test snake
-    std::vector<int> queue;
-    for (int i = 0; i < 10000; ++i)
-        queue.push_back(i);
-    for (int i = 100; i < 10000; ++i) {
-        for (int j = 0; j < 100; ++j)
-            queue.push_back(1);
-        for (int j = 0; j < 100; ++j)
-            queue.push_back(-1);
+void CopyStack(size_t count) {
+    stack::Stack<int> test1;
+    stack::Stack<int> test2;
+    for (size_t i = 0; i < count; ++i) {
+        test2.Push(1);
+        test1.Push(2);
     }
-    for (int i = 0; i < 10000; ++i)
-        queue.push_back(-1);
-    // Test snake
-    ::fprintf(stdout, "Test snake\n");
-    test_snake_stack(queue);
-    test_snake_stack_vector(queue);
-    test_snake_stack_vector_smartpointer(queue);
 
+    auto tbegin = std::chrono::steady_clock::now();
+    test2 = test1;
+    auto tend = std::chrono::steady_clock::now();
+    ::fprintf(stdout, "%d\n",
+              static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tend - tbegin).count()));
+}
+
+void CopyStackVector(size_t count) {
+    stack_vector::Stack<int> test1;
+    stack_vector::Stack<int> test2;
+    for (size_t i = 0; i < count; ++i) {
+        test2.Push(1);
+        test1.Push(2);
+    }
+
+    auto tbegin = std::chrono::steady_clock::now();
+    test2 = test1;
+    auto tend = std::chrono::steady_clock::now();
+    ::fprintf(stdout, "%d\n",
+              static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tend - tbegin).count()));
+}
+
+void CopyStackVectorSmartpointer(size_t count) {
+    stack_vector_smartpointer::Stack<int> test1;
+    stack_vector_smartpointer::Stack<int> test2;
+    for (size_t i = 0; i < count; ++i) {
+        test2.Push(1);
+        test1.Push(2);
+    }
+
+    auto tbegin = std::chrono::steady_clock::now();
+    test2 = test1;
+    auto tend = std::chrono::steady_clock::now();
+    ::fprintf(stdout, "%d\n",
+              static_cast<int>(std::chrono::duration_cast<std::chrono::nanoseconds>(tend - tbegin).count()));
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+
+int main() {
+    for (size_t count = 10; count < 1000000; count *= 10) {
+        for (size_t count_1 = 0; count_1 < 100; ++count_1) {
+            TestHeapStack(count);
+            TestHeapStackVector(count);
+            TestHeapStackVectorSmartpointer(count);
+
+            // Test snake
+            std::vector<int> queue;
+            for (size_t i = 0; i < count; ++i)
+                queue.push_back(1);
+
+            for (int i = 1; i < 100; ++i) {
+                for (size_t j = 0; j < count; ++j)
+                    queue.push_back(1);
+                for (size_t j = 0; j < count; ++j)
+                    queue.push_back(-1);
+            }
+            for (size_t i = 0; i < count; ++i)
+                queue.push_back(-1);
+
+            // Test snake
+            TestSnakeStack(queue);
+            TestSnakeStackVector(queue);
+            TestSnakeStackVectorSmartpointer(queue);
+
+            CopyStack(count);
+            CopyStackVector(count);
+            CopyStackVectorSmartpointer(count);
+        }
+    }
 }
